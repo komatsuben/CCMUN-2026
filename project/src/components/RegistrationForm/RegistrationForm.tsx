@@ -38,12 +38,31 @@ interface FormData {
 }
 
 const RegistrationForm: React.FC = () => {
+  const defaultValues: FormData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    school: '',
+    grade: '',
+    experience: '',
+    committee1: '',
+    committee2: '',
+    committee3: '',
+    dietaryRestrictions: '',
+    emergencyContact: '',
+    emergencyPhone: '',
+    agreement: false,
+  };
+
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues,
+  });
 
   const [submitted, setSubmitted] = React.useState(false);
 

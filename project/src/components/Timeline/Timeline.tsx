@@ -1,17 +1,12 @@
 import React from 'react';
+import { Container, Typography, Card, CardContent, Stack, Box } from '@mui/material';
 import {
-  Box,
-  Container,
-  Typography,
   Timeline,
   TimelineItem,
   TimelineSeparator,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-  Card,
-  CardContent,
-  Stack,
 } from '@mui/lab';
 import {
   EventAvailable,
