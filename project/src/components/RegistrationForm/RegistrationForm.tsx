@@ -132,7 +132,7 @@ const RegistrationForm: React.FC = () => {
             <Card sx={{ width: '100%', maxWidth: 800 }}>
               <CardContent sx={{ p: 4 }}>
                 {submitted ? (
-                  <Alert severity="success\" sx={{ mb: 2 }}>
+                  <Alert severity="success" sx={{ mb: 2 }}>
                     Thank you for registering! We'll send you a confirmation email shortly.
                   </Alert>
                 ) : null}
