@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -10,6 +10,30 @@ import {
 import { KeyboardArrowDown, Event, LocationOn, People } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
+const useParallax = (ref: React.RefObject<HTMLElement>, factor = 0.1) => {
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      // Calculate offset based on scroll position, but limit the maximum offset
+      const maxOffset = 100; // Maximum offset in pixels
+      const newOffset = Math.min(scrollY * factor, maxOffset);
+      setOffset(newOffset);
+    };
+
+    // Initial calculation
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [ref, factor]);
+
+  return offset;
+};
+
 const HeroSection: React.FC = () => {
   const scrollToNext = () => {
     const aboutSection = document.querySelector('#about');
@@ -18,17 +42,37 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const parallaxOffset = useParallax(heroRef, 0.3);
+
   return (
     <Box 
+      ref={heroRef}
       id="hero" 
       sx={{ 
         position: 'relative', 
         height: '100vh', 
         overflow: 'hidden',
-        backgroundImage: 'url(https://images.pexels.com/photos/159751/book-address-book-learning-learn-159751.jpeg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(https://images.pexels.com/photos/159751/book-address-book-learning-learn-159751.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          // Use negative margin to prevent pushing content down
+          transform: `translate3d(0, -${parallaxOffset}px, 0)`,
+          willChange: 'transform',
+          // Ensure the background covers the entire area even when moving
+          height: `calc(100% + ${parallaxOffset * 2}px)`,
+          marginTop: `-${parallaxOffset}px`,
+          zIndex: 0,
+        },
+        '&::after': {
           content: '""',
           position: 'absolute',
           top: 0,
