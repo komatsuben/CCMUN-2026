@@ -5,7 +5,7 @@
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
 [![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=flat&logo=mui&logoColor=white)](https://mui.com/)
 
-Official website for the CCMUN (City College Model United Nations) 2026 conference. This modern, responsive web application provides information about the event, registration functionality, and essential details for participants.
+Official website for the CCMUN (Canisius College Model United Nations) 2026 conference. This modern, responsive web application provides information about the event, registration functionality, and essential details for participants.
 
 ## 🚀 Features
 
